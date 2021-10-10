@@ -8,10 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 
-
-
-namespace InMemoryApp.Web
+namespace IDistributedCacheRedisApp.Web
 {
     public class Startup
     {
@@ -25,8 +24,11 @@ namespace InMemoryApp.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddMemoryCache();   // build-in olarak geliyor.
+            services.AddStackExchangeRedisCache(options=> {
+
+                options.Configuration = "localhost:6379";
+                
+                });
             services.AddControllersWithViews();
         }
 

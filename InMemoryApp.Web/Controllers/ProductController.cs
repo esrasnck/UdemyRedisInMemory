@@ -30,16 +30,17 @@ namespace InMemoryApp.Web.Controllers
             #endregion
 
             #region  2.yol
-            // alabilirse hem geriye true dönecek hem de value'u zamanCache'e atıyacak
-            //if (!_memoryCache.TryGetValue<string>("zaman", out string zamanCache))
-            //{
-            //    // ömür belirtmek istediğimiz yer.
-            //    MemoryCacheEntryOptions options = new MemoryCacheEntryOptions(); // bu sınıfı kullanarak yapıyoruz.
-            //    options.AbsoluteExpiration = DateTime.Now.AddSeconds(10);
+           // alabilirse hem geriye true dönecek hem de value'u zamanCache'e atıyacak
+            if (!_memoryCache.TryGetValue<string>("zaman", out string zamanCache))
+            {
+                // ömür belirtmek istediğimiz yer.
+                //MemoryCacheEntryOptions options = new MemoryCacheEntryOptions(); // bu sınıfı kullanarak yapıyoruz.
+                //options.AbsoluteExpiration = DateTime.Now.AddSeconds(10);
 
 
-            //    _memoryCache.Set<string>("zaman", DateTime.Now.ToString(),options); // value olarak string tutmam gerek. Bu durumda tip güvenli hale gelmiş oldu.
-            //}
+
+                //_memoryCache.Set<string>("zaman", DateTime.Now.ToString(), options); // value olarak string tutmam gerek. Bu durumda tip güvenli hale gelmiş oldu.
+            }
 
             #endregion
 
@@ -70,7 +71,7 @@ namespace InMemoryApp.Web.Controllers
             // ilgli key'i nasıl silebiliriz ?
 
             #region Remove metodu
-            // _memoryCache.Remove("zaman");
+            _memoryCache.Remove("zaman");
             #endregion
 
             #region GetOrCreate metodu
@@ -86,8 +87,9 @@ namespace InMemoryApp.Web.Controllers
 
             ViewBag.zaman = zamanCache;
             ViewBag.callback = callBack;
+
             ViewBag.product = _memoryCache.Get<Product>("product:1");
-            ViewBag.money = _memoryCache.Get<double>("money");
+            ViewBag.money =    _memoryCache.Get<double>("money");
             //ViewBag.zaman1 = _memoryCache.Get<string>("zaman");
             return View();
         }
